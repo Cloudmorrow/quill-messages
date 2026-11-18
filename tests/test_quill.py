@@ -47,7 +47,7 @@ def test_the_manifest_is_one_thread_of_conversations_between_people(q):
     # Between people and no other way: the kit's pen is the To box, nothing is made by name.
     assert screen["made_as"] == {"direct": {"kind": "direct"}}
     assert screen["reactions"] == REACTION
-    assert q.manifest.category == "personal"
+    assert q.manifest.category == "communication"
 
 
 def test_a_conversation_between_two_people_is_found_from_either_side(q):

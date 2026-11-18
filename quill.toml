@@ -7,9 +7,9 @@
 [quill]
 id = "messages"
 name = "Messages"
-version = "1.1.0"
+version = "1.1.1"
 summary = "Conversations with the people on your cloud, with one person or several, with reactions: your messages, kept on your own cloud."
-category = "personal"
+category = "communication"
 icon = "messages"
 publisher = "Cloudmorrow"
 license = "AGPL-3.0-or-later"
