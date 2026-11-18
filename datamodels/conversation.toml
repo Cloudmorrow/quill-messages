@@ -1,0 +1,26 @@
+# A conversation: the space the messages are in. One between two people is
+# found-or-made from either side and called after the other person; a group
+# is named, and the people in it are its members. Being able to see it is
+# being able to write in it; its maker (and an administrator) renames or
+# deletes it; a member may leave.
+[datamodel]
+id = "messages.conversation"
+version = 1
+label = "Conversation"
+description = "Who you are writing with: one person, or a group you named."
+scopes = ["shared"]
+title = "name"
+space = true
+
+[fields]
+name = { kind = "string", required = true }
+# How it was made: between two people (named for the other one), or a group.
+kind = { kind = "enum", values = ["direct", "group"], labels = ["Direct", "Group"], default = "direct", indexed = true }
+# Where the conversation is. Here, for now: a bridge that brings in the
+# conversations held at an outside service marks them with it, and the
+# messages written here in such a conversation are its to send on.
+via = { kind = "enum", values = ["cloudmorrow", "messenger", "whatsapp"], labels = ["Cloudmorrow", "Messenger", "WhatsApp"], default = "cloudmorrow", indexed = true }
+# For one held elsewhere: whom it is with there (a number, a handle), and
+# the service's own id for the thread, so a bridge finds it again.
+address = { kind = "string" }
+outside_id = { kind = "string", indexed = true }

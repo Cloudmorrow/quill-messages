@@ -1,0 +1,16 @@
+# A reaction: one person's emoji on a message. One record per person per
+# emoji per message, theirs alone to take back, never unread.
+[datamodel]
+id = "messages.reaction"
+version = 1
+label = "Reaction"
+description = "One person's emoji on a message."
+scopes = ["shared"]
+title = "emoji"
+in_space = "conversation"
+authored = true
+
+[fields]
+conversation = { kind = "link", to = "messages.conversation", required = true, indexed = true, on_delete = "cascade" }
+message = { kind = "link", to = "messages.message", required = true, indexed = true, on_delete = "cascade" }
+emoji = { kind = "string", required = true }

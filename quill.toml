@@ -1,0 +1,54 @@
+# Messages: conversations with the people on your cloud, the way a phone's
+# messages are — one with each person, there the moment you pick them, and
+# groups you name — kept on your own cloud. Everything here is declared:
+# the core's spaces and the thread kit do the rest. See CLAUDE.md for the
+# format and the loop.
+
+[quill]
+id = "messages"
+name = "Messages"
+version = "1.0.0"
+summary = "Conversations with the people on your cloud, one to one or in a group, with reactions: your messages, kept on your own cloud."
+category = "personal"
+icon = "messages"
+publisher = "Cloudmorrow"
+license = "AGPL-3.0-or-later"
+features = [
+  "One conversation with each person: pick somebody and it is there, whether or not it was a moment ago, from either side",
+  "Groups: name one, put people in it; anybody in it adds somebody, anybody leaves",
+  "Reactions: a ❤️ or a 👍 on a message is one tap, and yours again takes it back",
+  "What you have not read is counted beside each conversation and on the app's icon, and a push arrives when somebody writes",
+  "Every message sealed at rest on your own cloud; a message is its author's to change or take back",
+  "Room for the conversations you have elsewhere: each one says where it is — here for now; Messenger, WhatsApp and the like are for a bridge to bring in and keep here",
+]
+
+# Messages introduces its own conversations, messages and reactions, apart
+# from Channels' rooms: a conversation is between people, never a room
+# everybody is in, and it may one day stand for one held elsewhere.
+[uses]
+datamodels = []
+
+# One tab: the conversations down the left with what is unread in each, the
+# open one beside them, newest at the bottom, the box to write in on the
+# floor. The people icon picks somebody and the conversation between you
+# is found, or made; the pen makes a group and puts people in it.
+[[screens]]
+id = "messages"
+kit = "thread"
+label = "Messages"
+icon = "messages"
+model = "messages.message"
+space = "conversation"               # the link that puts a message in its conversation
+body = "body"
+reactions = "messages.reaction"      # one emoji per person per message, toggled
+
+[screens.made_as]
+direct = { kind = "direct" }         # found-or-made between you and the person you pick
+shared = { kind = "group" }          # made from the pen, with the people you put in it
+
+# screenshots/: taken from a throwaway cloud named after nobody real, never
+# anybody's own (see "Working on it" in the README). The catalog's page
+# shows them.
+[[screenshots]]
+id = "messages"
+caption = "The conversations down the left with what is unread in each, the open one beside them, newest at the bottom"

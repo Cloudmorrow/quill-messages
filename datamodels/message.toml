@@ -1,0 +1,25 @@
+# A message: what somebody said in a conversation. Its author's to change
+# or take back (authored); everybody else in the conversation is told, and
+# it counts as unread for them until they look.
+[datamodel]
+id = "messages.message"
+version = 1
+label = "Message"
+description = "What somebody said in a conversation."
+scopes = ["shared"]
+title = "body"
+in_space = "conversation"
+authored = true
+
+[fields]
+conversation = { kind = "link", to = "messages.conversation", required = true, indexed = true, on_delete = "cascade" }
+body = { kind = "text", required = true }
+# For a message brought in from elsewhere: the service's own id for it, so
+# a bridge never brings the same one in twice.
+outside_id = { kind = "string", indexed = true }
+
+[[notify]]
+when = "created"
+to = "members"
+push = true
+unread = true
