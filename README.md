@@ -1,12 +1,12 @@
 # Messages
 
 Conversations with the people on your cloud, the way a phone's messages
-are: one with each person, there the moment you pick them, and groups you
-name. Kept on your own cloud, and nowhere else.
+are: pick who it is to, one person or several, and the conversation with
+exactly them is there. Kept on your own cloud, and nowhere else.
 
 A [Quill](https://github.com/Cloudmorrow/cloudmorrow/blob/main/docs/QUILLS.md)
 for Cloudmorrow: install it from the Quill Catalog, or from this repository
-with `cm quill add --source https://github.com/Cloudmorrow/quill-messages --ref v1.0.0`.
+with `cm quill add --source https://github.com/Cloudmorrow/quill-messages --ref v1.1.0`.
 
 <p>
 <img src="screenshots/messages-desktop.webp" width="560" alt="Messages in a browser: the conversations down the left with what is unread in each, the open one beside them with the newest message at the bottom and a reaction under a line, and the box to write in on the floor">
@@ -16,12 +16,15 @@ with `cm quill add --source https://github.com/Cloudmorrow/quill-messages --ref 
 
 (A throwaway cloud made for the pictures, named after nobody real.)
 
-- **One conversation with each person.** Pick somebody and the conversation
-  with them is there, whether or not it existed a moment ago; them picking
-  you finds the same one. It is called after them.
-- **Groups.** Name one and put people in it. There is no invitation to
-  accept: you are added, you are told, and you can leave. Anybody in it can
-  add somebody; its maker (or an administrator) renames or deletes it.
+- **A new message is to the people you pick.** The pen opens a To box:
+  tap a person in the list under it and they become a pill in the box,
+  with an X that takes them out again; one person, or several. Then you are
+  in the conversation with exactly those people, writing.
+- **The conversation is already there.** Pick somebody you have written
+  to and the conversation with them opens, whether or not it existed a
+  moment ago; them picking you finds the same one. The same people again,
+  in any order, from any side, is the same conversation. It is called after
+  the others in it.
 - **Reactions.** One tap puts your ❤️ on a message; yours again takes it
   back. Six to choose from, counted under the line.
 - **Unread, and a push.** What you have not read is counted beside each
@@ -38,43 +41,45 @@ with `cm quill add --source https://github.com/Cloudmorrow/quill-messages --ref 
 ## Messages and Channels
 
 [Channels](https://github.com/Cloudmorrow/quill-channels) is a team's rooms:
-`#general` that everybody is in, private channels, threads, mentions and
-pinned messages. Messages is between people: a conversation is the people
-in it and nobody else, there is no room everybody is in, and nothing is
-pinned. They keep their own conversations and messages; install both and
-each is what it is.
+`#general` that everybody is in, named channels with people added and
+taken out, threads, mentions and pinned messages. Messages is between
+people: a conversation is the people in it and nobody else — nothing is
+named, nothing is joined or left, there is no room everybody is in, and
+nothing is pinned. They keep their own conversations and messages; install
+both and each is what it is.
 
 ## Using it
 
 A conversation is its people, and that *is* the access rule: whoever is in
-it reads it and writes in it, and nobody else sees that it exists.
-
-- **With one person.** Never made from a form. Pick `sara` and the
-  conversation with her is there, whether or not it was a moment ago;
-  `sara` picking you finds the same one.
-- **A group.** Made from the pen: a name, and the people in it. Anybody in
-  it adds somebody; anybody leaves; its maker renames or deletes it.
+it reads it and writes in it, and nobody else sees that it exists. It is
+never made from a form: pick who it is to and it is there — `sara` alone,
+or `sara` and `ole` — whether or not it was a moment ago, and the others
+picking you finds the same one. A conversation stays the people it was
+made between: to write to somebody else as well, pick them all and that is
+another conversation.
 
 Everyone can write to everyone on the server; there is no setting for that.
 
 **Unread** is when you last looked: everything somebody else wrote after
 that is unread, and opening the conversation, on any device, moves it on.
-Writing in a conversation reads it. Somebody added to a group counts from
-when they were added.
+Writing in a conversation reads it.
 
 #### In the web app
 
 The **Messages** tab: the conversations, with what is unread in each, then
 the open one, newest at the bottom; on a computer both side by side. The
-people icon beside the title picks a person and opens the conversation
-between you; the pen makes a group. Tap a message for its reactions. Push
-wakes the app the moment somebody writes.
+pen beside the title is a new message: a **To:** box, and everybody under
+it — tap a name and it is a pill in the box, tap the pill's X and it is
+out; type to narrow the list, Enter takes the one name left. *Write to
+Sara and Ole* opens the conversation with exactly them. Tap a message for
+its reactions. Push wakes the app the moment somebody writes.
 
 #### In the terminal app
 
 The **Messages** card: the conversations on the left, the open one on the
-right. `m` writes to one person, `n` makes a group, `a` adds somebody,
-`l` leaves, `e` renames or deletes one of yours; on a line, `x` reacts.
+right. `n` is a new message: space ticks the people it is to, the To line
+says who, Enter opens the conversation with them. `e` deletes one of
+yours; on a line, `x` reacts.
 
 #### On the command line
 
@@ -85,8 +90,8 @@ cm messages say sara "coffee at four?"
 cm messages react sara 3f2a ❤️        a line is named by the start of its id, as show prints it
 ```
 
-A conversation is named by the person (or the group's name); `show` prints
-each line's id in the margin.
+A conversation is named by the people in it (`sara`, or `ole, sara`);
+`show` prints each line's id in the margin.
 
 ## Where it goes
 
@@ -120,7 +125,7 @@ outside your server.
 
 | | |
 | --- | --- |
-| Datamodels | introduces `messages.conversation` (a space between people), `messages.message` and `messages.reaction` |
+| Datamodels | introduces `messages.conversation` (a space between the people picked), `messages.message` and `messages.reaction` |
 | Screens | Messages, a thread of conversations, on the phone, the web app, the terminal, `cm messages`, and to your assistant |
 | Code | none: everything is declared, and the core's spaces and thread kit do the rest; reaches nothing outside |
 

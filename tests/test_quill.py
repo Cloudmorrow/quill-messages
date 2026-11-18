@@ -44,7 +44,8 @@ def found_between(q, *others, kind="direct"):
 def test_the_manifest_is_one_thread_of_conversations_between_people(q):
     (screen,) = q.manifest.screens
     assert screen["kit"] == "thread" and screen["model"] == MESSAGE and screen["space"] == "conversation"
-    assert screen["made_as"] == {"direct": {"kind": "direct"}, "shared": {"kind": "group"}}
+    # Between people and no other way: the kit's pen is the To box, nothing is made by name.
+    assert screen["made_as"] == {"direct": {"kind": "direct"}}
     assert screen["reactions"] == REACTION
     assert q.manifest.category == "personal"
 
@@ -67,11 +68,14 @@ def test_what_is_written_is_read_by_the_people_in_it_and_nobody_else(q):
     assert ole.list(MESSAGE, conversation=ours.id) == []
 
 
-def test_a_group_is_named_and_everybody_in_it_reads_it(q):
+def test_a_conversation_with_several_people_is_everybody_in_it(q):
     sara, ole = q.as_user("sara"), q.as_user("ole")
-    trip = between(q, "sara", "ole", name="Summer trip", kind="group")
-    assert trip["name"] == "Summer trip" and trip["kind"] == "group"
-    assert [c["name"] for c in ole.list(CONVERSATION)] == ["Summer trip"]
+    trip = between(q, "sara", "ole")
+    assert trip["kind"] == "direct" and sorted(trip.members) == ["ole", "sara"]
+    assert [c.id for c in ole.list(CONVERSATION)] == [trip.id]
+    # The same people again is the same conversation, from any side.
+    assert found_between(ole, q.user, "sara") == trip.id
+    assert found_between(q, "sara") is None  # not the one with Sara alone
     sara.seed(MESSAGE, conversation=trip.id, body="who brings the tent?")
     assert [m["body"] for m in ole.list(MESSAGE, conversation=trip.id)] == ["who brings the tent?"]
 

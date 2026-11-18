@@ -1,21 +1,21 @@
 # Messages: conversations with the people on your cloud, the way a phone's
-# messages are — one with each person, there the moment you pick them, and
-# groups you name — kept on your own cloud. Everything here is declared:
+# messages are — pick who it is to, one person or several, and the
+# conversation with exactly them is there — kept on your own cloud. Everything here is declared:
 # the core's spaces and the thread kit do the rest. See CLAUDE.md for the
 # format and the loop.
 
 [quill]
 id = "messages"
 name = "Messages"
-version = "1.0.0"
-summary = "Conversations with the people on your cloud, one to one or in a group, with reactions: your messages, kept on your own cloud."
+version = "1.1.0"
+summary = "Conversations with the people on your cloud, with one person or several, with reactions: your messages, kept on your own cloud."
 category = "personal"
 icon = "messages"
 publisher = "Cloudmorrow"
 license = "AGPL-3.0-or-later"
 features = [
-  "One conversation with each person: pick somebody and it is there, whether or not it was a moment ago, from either side",
-  "Groups: name one, put people in it; anybody in it adds somebody, anybody leaves",
+  "A new message is to the people you pick — one, or several, as pills in a To box — and you are straight in the conversation with exactly them",
+  "The conversation with somebody is there whether or not it was a moment ago, from either side; the same people again is the same conversation",
   "Reactions: a ❤️ or a 👍 on a message is one tap, and yours again takes it back",
   "What you have not read is counted beside each conversation and on the app's icon, and a push arrives when somebody writes",
   "Every message sealed at rest on your own cloud; a message is its author's to change or take back",
@@ -30,8 +30,8 @@ datamodels = []
 
 # One tab: the conversations down the left with what is unread in each, the
 # open one beside them, newest at the bottom, the box to write in on the
-# floor. The people icon picks somebody and the conversation between you
-# is found, or made; the pen makes a group and puts people in it.
+# floor. The pen is a To box: pick who it is to, one person or several, and
+# the conversation between exactly those people opens — found, or made.
 [[screens]]
 id = "messages"
 kit = "thread"
@@ -42,9 +42,10 @@ space = "conversation"               # the link that puts a message in its conve
 body = "body"
 reactions = "messages.reaction"      # one emoji per person per message, toggled
 
+# Made between people and no other way: the pen is the picker, and nothing
+# is made by name.
 [screens.made_as]
-direct = { kind = "direct" }         # found-or-made between you and the person you pick
-shared = { kind = "group" }          # made from the pen, with the people you put in it
+direct = { kind = "direct" }         # found-or-made between you and the people you pick
 
 # screenshots/: taken from a throwaway cloud named after nobody real, never
 # anybody's own (see "Working on it" in the README). The catalog's page

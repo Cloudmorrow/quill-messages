@@ -14,7 +14,8 @@ space = true
 
 [fields]
 name = { kind = "string", required = true }
-# How it was made: between two people (named for the other one), or a group.
+# How it was made: between the people in it (named for the others), or a
+# named group — not made from the kit today; kept for one that is.
 kind = { kind = "enum", values = ["direct", "group"], labels = ["Direct", "Group"], default = "direct", indexed = true }
 # Where the conversation is. Here, for now: a bridge that brings in the
 # conversations held at an outside service marks them with it, and the
